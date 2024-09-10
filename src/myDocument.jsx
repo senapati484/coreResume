@@ -5,13 +5,17 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
     backgroundColor: "#E4E4E4",
-    padding: 20,
+    padding: 10,
   },
   section: {
     margin: 10,
-    padding: 10,
     flexGrow: 1,
     borderBottom: "1px solid #000",
+  },
+  Nameheader: {
+    fontSize: 32,
+    marginBottom: 10,
+    fontWeight: "bold",
   },
   header: {
     fontSize: 18,
@@ -34,7 +38,7 @@ export const MyDocument = () => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
-        <Text style={styles.header}>Sayan Senapati</Text>
+        <Text style={styles.Nameheader}>Sayan Senapati</Text>
         <Text style={styles.text}>Passionate Full Stack Developer</Text>
         <Text style={styles.text}>
           Contact: +91 8653420095 | Email: Sayansenapati2544@gmail.com

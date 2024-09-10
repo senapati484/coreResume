@@ -9,6 +9,7 @@ export function CreatePdf() {
     email: "",
     phone: "",
     about: "",
+    homeLocation: "",
     experience: [{ company: "", years: "", field: "" }], // Ensure initial state is an array
     skills: [""],
     education: [
@@ -23,6 +24,7 @@ export function CreatePdf() {
     if (location.state?.formData) {
       setFormData({
         ...location.state.formData,
+        homeLocation: location.state.formData.homeLocation || "",
         experience: Array.isArray(location.state.formData.experience)
           ? location.state.formData.experience
           : [{ company: "", years: "", field: "" }],
@@ -136,7 +138,7 @@ export function CreatePdf() {
       <form className="space-y-6">
         {/* Name Input */}
         <div>
-          <label className="block text-gray-700 text-lg font-medium mb-2">
+          <label className="block text-gray-700 lg:text-lg md:text-md text-base font-medium mb-2">
             Name:
           </label>
           <input
@@ -144,14 +146,14 @@ export function CreatePdf() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="John Doe"
           />
         </div>
 
         {/* Email Input */}
         <div>
-          <label className="block text-gray-700 text-lg font-medium mb-2">
+          <label className="block text-gray-700 lg:text-lg md:text-md text-base font-medium mb-2">
             Email:
           </label>
           <input
@@ -159,14 +161,14 @@ export function CreatePdf() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="john.doe@example.com"
           />
         </div>
 
         {/* Phone Input */}
         <div>
-          <label className="block text-gray-700 text-lg font-medium mb-2">
+          <label className="block text-gray-700 lg:text-lg md:text-md text-base font-medium mb-2">
             Phone:
           </label>
           <input
@@ -174,28 +176,43 @@ export function CreatePdf() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="+1234567890"
           />
         </div>
 
         {/* About Yourself */}
         <div>
-          <label className="block text-gray-700 text-lg font-medium mb-2">
+          <label className="block text-gray-700 lg:text-lg md:text-md text-base font-medium mb-2">
             About:
           </label>
           <textarea
             name="about"
             value={formData.about}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Write about yourself"
+          />
+        </div>
+
+        {/* Home Location Input */}
+        <div>
+          <label className="block text-gray-700 lg:text-lg md:text-md text-base font-medium mb-2">
+            Home Location:
+          </label>
+          <input
+            type="text"
+            name="homeLocation"
+            value={formData.homeLocation}
+            onChange={handleChange}
+            className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="Enter your home location"
           />
         </div>
 
         {/* Education Section */}
         <div>
-          <label className="block text-gray-700 text-lg font-medium mb-2">
+          <label className="block text-gray-700 lg:text-lg md:text-md text-base font-medium mb-2">
             Education:
           </label>
           {educationEntries.map((edu, index) => (
@@ -210,7 +227,7 @@ export function CreatePdf() {
                 onChange={(e) =>
                   handleEducationChange(index, "college", e.target.value)
                 }
-                className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
+                className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
               />
               <input
                 type="text"
@@ -219,7 +236,7 @@ export function CreatePdf() {
                 onChange={(e) =>
                   handleEducationChange(index, "course", e.target.value)
                 }
-                className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
+                className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
               />
               <div className="flex gap-4">
                 <div className="w-full">
@@ -233,7 +250,7 @@ export function CreatePdf() {
                     onChange={(e) =>
                       handleEducationChange(index, "startYear", e.target.value)
                     }
-                    className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
                 <div className="w-full">
@@ -247,7 +264,7 @@ export function CreatePdf() {
                     onChange={(e) =>
                       handleEducationChange(index, "endYear", e.target.value)
                     }
-                    className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
               </div>
@@ -258,7 +275,7 @@ export function CreatePdf() {
                 onChange={(e) =>
                   handleEducationChange(index, "gpa", e.target.value)
                 }
-                className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
           ))}
@@ -266,7 +283,7 @@ export function CreatePdf() {
           <button
             type="button"
             onClick={addEducation}
-            className="mt-2 bg-gray-200 text-blue-600 py-2 px-4 rounded-md shadow-sm hover:bg-gray-300 transition"
+            className="mt-2 bg-gray-200 text-blue-600 lg:px-5 md:px-4 px-3 lg:py-2 md:py-2 py-1 rounded-md shadow-sm hover:bg-gray-300 transition"
           >
             Add Education
           </button>
@@ -274,7 +291,7 @@ export function CreatePdf() {
 
         {/* Experience Section */}
         <div>
-          <label className="block text-gray-700 text-lg font-medium mb-2">
+          <label className="block text-gray-700 lg:text-lg md:text-md text-base font-medium mb-2">
             Experiences:
           </label>
           {experienceEntries.map((exp, index) => (
@@ -289,7 +306,7 @@ export function CreatePdf() {
                 onChange={(e) =>
                   handleExperienceChange(index, "company", e.target.value)
                 }
-                className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
+                className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
               />
               <input
                 type="text"
@@ -298,7 +315,7 @@ export function CreatePdf() {
                 onChange={(e) =>
                   handleExperienceChange(index, "years", e.target.value)
                 }
-                className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
+                className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
               />
               <input
                 type="text"
@@ -307,7 +324,7 @@ export function CreatePdf() {
                 onChange={(e) =>
                   handleExperienceChange(index, "field", e.target.value)
                 }
-                className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
           ))}
@@ -322,7 +339,7 @@ export function CreatePdf() {
 
         {/* Projects Section */}
         <div>
-          <label className="block text-gray-700 text-lg font-medium mb-2">
+          <label className="block text-gray-700 lg:text-lg md:text-md text-base font-medium mb-2">
             Projects:
           </label>
           {projectEntries.map((proj, index) => (
@@ -337,7 +354,7 @@ export function CreatePdf() {
                 onChange={(e) =>
                   handleProjectChange(index, "name", e.target.value)
                 }
-                className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
+                className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
               />
               <textarea
                 placeholder="About the Project"
@@ -345,7 +362,7 @@ export function CreatePdf() {
                 onChange={(e) =>
                   handleProjectChange(index, "about", e.target.value)
                 }
-                className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
+                className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
               />
               <input
                 type="text"
@@ -354,7 +371,7 @@ export function CreatePdf() {
                 onChange={(e) =>
                   handleProjectChange(index, "time", e.target.value)
                 }
-                className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
+                className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
               />
               <div className="mb-2">
                 <label className="block text-gray-700 text-sm font-medium mb-2">
@@ -373,7 +390,7 @@ export function CreatePdf() {
                         e.target.value
                       )
                     }
-                    className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
+                    className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
                   />
                 ))}
                 <button
@@ -397,7 +414,7 @@ export function CreatePdf() {
 
         {/* Skills Section */}
         <div>
-          <label className="block text-gray-700 text-lg font-medium mb-2">
+          <label className="block text-gray-700 lg:text-lg md:text-md text-base font-medium mb-2">
             Skills:
           </label>
           {formData.skills.map((skill, index) => (
@@ -407,7 +424,7 @@ export function CreatePdf() {
               placeholder="Skill"
               value={skill}
               onChange={(e) => handleSkillChange(index, e.target.value)}
-              className="w-full border border-gray-300 p-3 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
+              className="w-full border border-gray-300 lg:p-3 md:p-2 p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
             />
           ))}
           <button
