@@ -116,6 +116,7 @@ export function CreatePdf() {
   };
 
   const handleNext = () => {
+    localStorage.setItem("resumeFormData", JSON.stringify(formData));
     navigate("/view-pdf", { state: { formData } });
   };
 

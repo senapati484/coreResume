@@ -5,22 +5,32 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
     backgroundColor: "#E4E4E4",
-    padding: 10,
+    padding: 40,
   },
   section: {
-    margin: 10,
     flexGrow: 1,
-    borderBottom: "1px solid #000",
+    marginBottom: 10,
+  },
+  subSection: {
+    marginBottom: 5,
+  },
+  smallSection: {
+    flexDirection: "column",
+    width: "350px",
+  },
+  bigSection: {
+    flexDirection: "row",
   },
   Nameheader: {
     fontSize: 32,
-    marginBottom: 10,
+    marginBottom: 20,
     fontWeight: "bold",
   },
   header: {
     fontSize: 18,
-    marginBottom: 10,
+    marginBottom: 15,
     fontWeight: "bold",
+    fontStyle: "uppercase",
   },
   subHeader: {
     fontSize: 14,
@@ -31,84 +41,134 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 5,
   },
+  AboutText: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  TextEmail: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
 });
 
 // Create Document Component
-export const MyDocument = () => (
-  <Document>
-    <Page size="A4" style={styles.page}>
-      <View style={styles.section}>
-        <Text style={styles.Nameheader}>Sayan Senapati</Text>
-        <Text style={styles.text}>Passionate Full Stack Developer</Text>
-        <Text style={styles.text}>
-          Contact: +91 8653420095 | Email: Sayansenapati2544@gmail.com
-        </Text>
-        <Text style={styles.text}>Location: Amta, Howrah, West Bengal</Text>
-        <Text style={styles.text}>
-          Website: https://sayansenapati-1.web.app
-        </Text>
-      </View>
+export const MyDocument = () => {
+  // Fetch form data from local storage
+  const formData = JSON.parse(localStorage.getItem("resumeFormData")) || {
+    name: "",
+    email: "",
+    phone: "",
+    about: "",
+    homeLocation: "",
+    experience: [{ company: "", years: "", field: "" }],
+    skills: [""],
+    education: [
+      { college: "", startYear: "", endYear: "", gpa: "", course: "" },
+    ],
+    projects: [{ name: "", about: "", time: "", skillsUsed: [""] }],
+  };
 
-      <View style={styles.section}>
-        <Text style={styles.header}>Core Skills</Text>
-        <Text style={styles.text}>
-          Languages: C, JavaScript, Java, Python, SQL
-        </Text>
-        <Text style={styles.text}>Frameworks: React, Node</Text>
-        <Text style={styles.text}>
-          Database: Firebase, SupaBase, MongoDB, PostgreSQL
-        </Text>
-        <Text style={styles.text}>
-          Others: Spline, Matter.js, Email.js API, Auth, Tailwind
-        </Text>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.header}>Education</Text>
-        <Text style={styles.subHeader}>The Calcutta Technical School</Text>
-        <Text style={styles.text}>
-          Diploma in Computer Science (Apr 2022 - May 2025)
-        </Text>
-        <Text style={styles.text}>GPA: 8.2/10 (4th sem)</Text>
-        <Text style={styles.subHeader}>Amta Nityananada High School</Text>
-        <Text style={styles.text}>X - 74.3% | XII - 73.5%</Text>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.header}>Projects</Text>
-        <View>
-          <Text style={styles.subHeader}>1. Portfolio Website</Text>
-          <Text style={styles.text}>
-            Developed and deployed a personalized portfolio website utilizing
-            React and Firebase.
-          </Text>
-
-          <Text style={styles.subHeader}>2. AI Travel Planner</Text>
-          <Text style={styles.text}>
-            Designed and implemented a fully functional Travel Planner,
-            integrated predefined AI/ML model (Gemini API) for generating travel
-            plans.
-          </Text>
-          <Text style={styles.text}>
-            Utilized: React, Firebase, Google Auth, Google Maps API
-          </Text>
-
-          <Text style={styles.subHeader}>3. Today I Learned</Text>
-          <Text style={styles.text}>
-            Knowledge sharing platform for everyone. Utilized React, Supabase,
-            Tailwind.
-          </Text>
-
-          <Text style={styles.subHeader}>4. Other Projects</Text>
-          <Text style={styles.text}>
-            Chat AI: A personalized AI-powered chatbot made using the Gemini
-            API.
-          </Text>
-          <Text style={styles.text}>
-            CodeWithSayan: A course-selling website demo made using React.
-          </Text>
+  return (
+    <Document>
+      <Page style={styles.page}>
+        <View style={styles.section}>
+          {formData.name && (
+            <Text style={styles.Nameheader}>{formData.name}</Text>
+          )}
+          {formData.about && (
+            <Text style={styles.AboutText}>{formData.about}</Text>
+          )}
         </View>
-      </View>
-    </Page>
-  </Document>
-);
+
+        <View style={styles.bigSection}>
+          <View style={styles.smallSection}>
+            {formData.email || formData.phone || formData.homeLocation ? (
+              <View style={styles.section}>
+                <Text style={styles.header}>Contact:</Text>
+                {formData.email && (
+                  <Text style={styles.TextEmail}>{formData.email}</Text>
+                )}
+                {formData.phone && (
+                  <Text style={styles.text}>{formData.phone}</Text>
+                )}
+                {formData.homeLocation && (
+                  <Text style={styles.text}>
+                    Location: {formData.homeLocation}
+                  </Text>
+                )}
+              </View>
+            ) : null}
+
+            {formData.education &&
+            formData.education.some((edu) => edu.college) ? (
+              <View style={styles.section}>
+                <Text style={styles.header}>Education:</Text>
+                {formData.education.map(
+                  (edu, index) =>
+                    edu.college && (
+                      <View key={index} style={styles.subSection}>
+                        <Text style={styles.subHeader}>{edu.college}</Text>
+                        <Text style={styles.text}>
+                          {edu.course} ({edu.startYear} - {edu.endYear})
+                        </Text>
+                        <Text style={styles.text}>GPA: {edu.gpa}</Text>
+                      </View>
+                    )
+                )}
+              </View>
+            ) : null}
+
+            {formData.experience &&
+            formData.experience.some((exp) => exp.company) ? (
+              <View style={styles.section}>
+                <Text style={styles.header}>Experience:</Text>
+                {formData.experience.map(
+                  (exp, index) =>
+                    exp.company && (
+                      <View key={index} style={styles.subSection}>
+                        <Text style={styles.subHeader}>{exp.company}</Text>
+                        <Text style={styles.text}>
+                          {exp.field}, {exp.years} years
+                        </Text>
+                      </View>
+                    )
+                )}
+              </View>
+            ) : null}
+          </View>
+
+          <View style={styles.smallSection}>
+            {formData.projects &&
+            formData.projects.some((proj) => proj.name) ? (
+              <View style={styles.section}>
+                <Text style={styles.header}>Projects:</Text>
+                {formData.projects.map(
+                  (proj, index) =>
+                    proj.name && (
+                      <View key={index} style={styles.subSection}>
+                        <Text style={styles.subHeader}>{proj.name}</Text>
+                        <Text style={styles.text}>About: {proj.about}</Text>
+                        <Text style={styles.text}>Time: {proj.time}</Text>
+                        <Text style={styles.text}>
+                          Skills Used: {proj.skillsUsed.join(", ")}
+                        </Text>
+                      </View>
+                    )
+                )}
+              </View>
+            ) : null}
+
+            {formData.skills &&
+            formData.skills.length > 0 &&
+            formData.skills[0] !== "" ? (
+              <View style={styles.section}>
+                <Text style={styles.header}>Skills:</Text>
+                <Text style={styles.text}>{formData.skills.join(", ")}</Text>
+              </View>
+            ) : null}
+          </View>
+        </View>
+      </Page>
+    </Document>
+  );
+};
