@@ -12,7 +12,7 @@ export function ViewPdf() {
 
   const handleDownload = async () => {
     const blob = await pdf(<MyDocument formData={formData} />).toBlob();
-    saveAs(blob, "resume.pdf");
+    saveAs(blob, "coreresume.pdf");
   };
 
   const handlePrevious = () => {
