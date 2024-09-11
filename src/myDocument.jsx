@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   },
   subSection: {
     marginBottom: 5,
+    marginLeft: 4,
   },
   smallSection: {
     flexDirection: "column",
@@ -48,9 +49,6 @@ const styles = StyleSheet.create({
   TextEmail: {
     fontSize: 14,
     marginBottom: 5,
-  },
-  ml: {
-    marginLeft: 2,
   },
 });
 
@@ -89,17 +87,13 @@ export const MyDocument = () => {
               <View style={styles.section}>
                 <Text style={styles.header}>Contact:</Text>
                 {formData.email && (
-                  <Text style={styles.TextEmail} styles={styles.ml}>
-                    Email: {formData.email}
-                  </Text>
+                  <Text style={styles.TextEmail}>Email: {formData.email}</Text>
                 )}
                 {formData.phone && (
-                  <Text style={styles.text} styles={styles.ml}>
-                    Phone No: {formData.phone}
-                  </Text>
+                  <Text style={styles.text}>Phone No: {formData.phone}</Text>
                 )}
                 {formData.homeLocation && (
-                  <Text style={styles.text} styles={styles.ml}>
+                  <Text style={styles.text}>
                     Home Location: {formData.homeLocation}
                   </Text>
                 )}
@@ -113,11 +107,7 @@ export const MyDocument = () => {
                 {formData.education.map(
                   (edu, index) =>
                     edu.college && (
-                      <View
-                        key={index}
-                        style={styles.subSection}
-                        styles={styles.ml}
-                      >
+                      <View key={index} style={styles.subSection}>
                         <Text style={styles.subHeader}>{edu.college}</Text>
                         <Text style={styles.text}>
                           {edu.course} ({edu.startYear} - {edu.endYear})
@@ -136,11 +126,7 @@ export const MyDocument = () => {
                 {formData.experience.map(
                   (exp, index) =>
                     exp.company && (
-                      <View
-                        key={index}
-                        style={styles.subSection}
-                        styles={styles.ml}
-                      >
+                      <View key={index} style={styles.subSection}>
                         <Text style={styles.subHeader}>{exp.company}</Text>
                         <Text style={styles.text}>
                           {exp.field}, {exp.years} years
@@ -160,11 +146,7 @@ export const MyDocument = () => {
                 {formData.projects.map(
                   (proj, index) =>
                     proj.name && (
-                      <View
-                        key={index}
-                        style={styles.subSection}
-                        styles={styles.ml}
-                      >
+                      <View key={index} style={styles.subSection}>
                         <Text style={styles.subHeader}>{proj.name}</Text>
                         <Text style={styles.text}>About: {proj.about}</Text>
                         <Text style={styles.text}>Time: {proj.time}</Text>
@@ -182,9 +164,7 @@ export const MyDocument = () => {
             formData.skills[0] !== "" ? (
               <View style={styles.section}>
                 <Text style={styles.header}>Skills:</Text>
-                <Text style={styles.text} styles={styles.ml}>
-                  {formData.skills.join(", ")}
-                </Text>
+                <Text style={styles.text}>{formData.skills.join(", ")}</Text>
               </View>
             ) : null}
           </View>
