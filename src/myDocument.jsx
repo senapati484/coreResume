@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   subSection: {
     marginBottom: 5,
-    marginLeft: 4,
+    marginLeft: 5,
   },
   smallSection: {
     flexDirection: "column",
@@ -86,17 +86,21 @@ export const MyDocument = () => {
             {formData.email || formData.phone || formData.homeLocation ? (
               <View style={styles.section}>
                 <Text style={styles.header}>Contact:</Text>
-                {formData.email && (
-                  <Text style={styles.TextEmail}>Email: {formData.email}</Text>
-                )}
-                {formData.phone && (
-                  <Text style={styles.text}>Phone No: {formData.phone}</Text>
-                )}
-                {formData.homeLocation && (
-                  <Text style={styles.text}>
-                    Home Location: {formData.homeLocation}
-                  </Text>
-                )}
+                <View style={styles.subSection}>
+                  {formData.email && (
+                    <Text style={styles.TextEmail}>
+                      Email: {formData.email}
+                    </Text>
+                  )}
+                  {formData.phone && (
+                    <Text style={styles.text}>Phone No: {formData.phone}</Text>
+                  )}
+                  {formData.homeLocation && (
+                    <Text style={styles.text}>
+                      Home Location: {formData.homeLocation}
+                    </Text>
+                  )}
+                </View>
               </View>
             ) : null}
 
@@ -164,7 +168,9 @@ export const MyDocument = () => {
             formData.skills[0] !== "" ? (
               <View style={styles.section}>
                 <Text style={styles.header}>Skills:</Text>
-                <Text style={styles.text}>{formData.skills.join(", ")}</Text>
+                <View style={styles.subSection}>
+                  <Text style={styles.text}>{formData.skills.join(", ")}</Text>
+                </View>
               </View>
             ) : null}
           </View>
