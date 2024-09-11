@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   subSection: {
-    marginBottom: 5,
+    marginBottom: 8,
     marginLeft: 5,
   },
   smallSection: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 18,
-    marginBottom: 15,
+    marginBottom: 10,
     fontWeight: "bold",
     fontStyle: "uppercase",
   },
