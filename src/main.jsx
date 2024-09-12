@@ -4,6 +4,8 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CreatePdf } from "./create-pdf/index.jsx";
 import { ViewPdf } from "./view-pdf/index.jsx";
+import About from "./components/About.jsx";
+import Contact from "./components/Contact.jsx";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
   {
     path: "/view-pdf",
     element: <ViewPdf />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
   },
 ]);
 
